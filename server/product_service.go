@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 
-	pb "golang-order/gen"
+	pb "github.com/Sunshine9d/golang-order/gen"
 )
 
 type ProductService struct {

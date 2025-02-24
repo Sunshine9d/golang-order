@@ -4,8 +4,8 @@ import (
 	"log"
 	"net"
 
-	"golang-order/gen"    // Ensure this matches your module name
-	"golang-order/server" // Ensure this matches your module name
+	"github.com/Sunshine9d/golang-order/gen"    // Ensure this matches your module name
+	"github.com/Sunshine9d/golang-order/server" // Ensure this matches your module name
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc"
