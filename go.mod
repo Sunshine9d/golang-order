@@ -7,7 +7,7 @@ require (
     google.golang.org/genproto/googleapis/api v0.0.0-20250219182151-9fdb1cabc7b2
     google.golang.org/grpc v1.70.0
     google.golang.org/protobuf v1.36.5
-    github.com/Sunshine9d/golang-order/gen v1.0.1 // replace with the correct version
+    github.com/Sunshine9d/golang-order/gen v1.0.3 // replace with the correct version
 )
 
 require (
