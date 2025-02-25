@@ -46,6 +46,7 @@ Connect PostgreSQL in Golang
 - go get github.com/jackc/pgx/v5
 db/database.go
 
+
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -66,3 +67,7 @@ VALUES
     ('Monitor', '27-inch 4K monitor', 399.99, 15),
     ('External SSD', '1TB portable SSD', 149.99, 40),
     ('Wireless Speaker', 'Bluetooth wireless speaker', 79.99, 60);
+
+    SELECT current_user;
+    GRANT SELECT, INSERT, UPDATE, DELETE ON products TO golang_user;
+    GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO golang_user;
