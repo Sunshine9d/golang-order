@@ -1,20 +1,11 @@
 syntax = "proto3";
 
-package product;
-option go_package = "./gen";
-
-import "google/api/annotations.proto";
-
+package pb;
+option go_package = "github.com/Sunshine9d/golang-order/gen/pb";
 service ProductService {
-  // Get a product by ID (gRPC + REST)
-  rpc GetProduct(GetProductRequest) returns (Product) {
-    option (google.api.http) = {
-      get: "/v1/products/{id}"
-    };
-  }
+  rpc GetProduct(GetProductRequest) returns (Product);
 }
 
-// Request and Response messages
 message GetProductRequest {
   string id = 1;
 }

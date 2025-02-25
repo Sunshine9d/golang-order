@@ -4,7 +4,7 @@
 // - protoc             v5.29.3
 // source: proto/product.proto
 
-package gen
+package pb
 
 import (
 	context "context"
@@ -19,14 +19,13 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ProductService_GetProduct_FullMethodName = "/product.ProductService/GetProduct"
+	ProductService_GetProduct_FullMethodName = "/pb.ProductService/GetProduct"
 )
 
 // ProductServiceClient is the client API for ProductService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProductServiceClient interface {
-	// Get a product by ID (gRPC + REST)
 	GetProduct(ctx context.Context, in *GetProductRequest, opts ...grpc.CallOption) (*Product, error)
 }
 
@@ -52,7 +51,6 @@ func (c *productServiceClient) GetProduct(ctx context.Context, in *GetProductReq
 // All implementations must embed UnimplementedProductServiceServer
 // for forward compatibility.
 type ProductServiceServer interface {
-	// Get a product by ID (gRPC + REST)
 	GetProduct(context.Context, *GetProductRequest) (*Product, error)
 	mustEmbedUnimplementedProductServiceServer()
 }
@@ -110,7 +108,7 @@ func _ProductService_GetProduct_Handler(srv interface{}, ctx context.Context, de
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ProductService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "product.ProductService",
+	ServiceName: "pb.ProductService",
 	HandlerType: (*ProductServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
