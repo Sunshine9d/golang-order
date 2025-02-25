@@ -1,7 +1,7 @@
 package db
 
 import "database/sql"
-import "github.com/Sunshine9d/golang-order/gen/pb"
+import pb "github.com/Sunshine9d/golang-order/gen"
 
 type Database interface {
 	Connect() (*sql.DB, error)

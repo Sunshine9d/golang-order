@@ -22,12 +22,12 @@ func initDB() *postgres.PostgresDB {
 	if err != nil {
 		log.Fatalf("Failed to connect to database: %v", err)
 	}
-	defer db.DB.Close()
 	return db
 }
 
 func main() {
 	db := initDB()
+	defer db.DB.Close() // Close only when main exits
 	// Start gRPC server
 	listener, err := net.Listen("tcp", ":50051")
 	if err != nil {
@@ -35,9 +35,9 @@ func main() {
 	}
 
 	grpcServer := grpc.NewServer()
-	productService := &server.ProductServiceServer{DB: db}
+	productServiceServer := &server.ProductServiceServer{DB: db}
 	// Register ProductService
-	pb.RegisterProductServiceServer(grpcServer, productService) // ✅ Register the service
+	pb.RegisterProductServiceServer(grpcServer, productServiceServer) // ✅ Register the service
 	// Enable gRPC reflection
 	reflection.Register(grpcServer)
 
