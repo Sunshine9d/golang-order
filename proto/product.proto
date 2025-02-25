@@ -1,9 +1,17 @@
 syntax = "proto3";
 
-package pb;
-option go_package = "github.com/Sunshine9d/golang-order/gen/pb";
+package product;
+
+option go_package = "github.com/Sunshine9d/golang-order/gen";
+
+import "google/api/annotations.proto";  // ✅ Required for REST support
+
 service ProductService {
-  rpc GetProduct(GetProductRequest) returns (Product);
+  rpc GetProduct(GetProductRequest) returns (Product) {
+    option (google.api.http) = {  // ✅ Define REST endpoint
+      get: "/v1/products/{id}"
+    };
+  }
 }
 
 message GetProductRequest {
@@ -13,6 +21,5 @@ message GetProductRequest {
 message Product {
   string id = 1;
   string name = 2;
-  string description = 3;
-  double price = 4;
+  double price = 3;
 }

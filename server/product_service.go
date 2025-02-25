@@ -4,20 +4,22 @@ import (
 	"context"
 	"log"
 
-	pb "github.com/Sunshine9d/golang-order/gen"
+	"github.com/Sunshine9d/golang-order/db"
+	"github.com/Sunshine9d/golang-order/gen/pb"
 )
 
-type ProductService struct {
+type ProductServiceServer struct {
 	pb.UnimplementedProductServiceServer
+	DB db.ProductDB
 }
 
-// GetProduct implements gRPC service
-func (s *ProductService) GetProduct(ctx context.Context, req *pb.GetProductRequest) (*pb.Product, error) {
-	log.Println("Received gRPC request for product ID:", req.Id)
-	return &pb.Product{
-		Id:          req.Id,
-		Name:        "Laptop",
-		Description: "A high-performance laptop",
-		Price:       1200.50,
-	}, nil
+// GetProductByID handles gRPC requests
+func (s *ProductServiceServer) GetProductByID(ctx context.Context, req *pb.GetProductRequest) (*pb.Product, error) {
+	log.Printf("Received request for product ID: %d", req.Id)
+	product, err := s.DB.GetProductByID(req.Id)
+	if err != nil {
+		return nil, err
+	}
+
+	return product, nil
 }
