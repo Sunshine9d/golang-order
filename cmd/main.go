@@ -35,9 +35,9 @@ func main() {
 	}
 
 	grpcServer := grpc.NewServer()
-	productServiceServer := &server.ProductServiceServer{DB: db}
+	productService := &server.ProductServiceServer{DB: db}
 	// Register ProductService
-	pb.RegisterProductServiceServer(grpcServer, productServiceServer) // ✅ Register the service
+	pb.RegisterProductServiceServer(grpcServer, productService) // ✅ Register the service
 	// Enable gRPC reflection
 	reflection.Register(grpcServer)
 

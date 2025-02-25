@@ -7,11 +7,11 @@ option go_package = "github.com/Sunshine9d/golang-order/gen";
 import "google/api/annotations.proto";  // ✅ Required for REST support
 
 service ProductService {
-  rpc GetProducts(GetProductRequest1) returns (Product) {
-    option (google.api.http) = {  // ✅ Define REST endpoint
-      get: "/v1/products"
-    };
-  }
+//  rpc GetProducts(GetProductRequest1) returns (Product) {
+//    option (google.api.http) = {  // ✅ Define REST endpoint
+//      get: "/v1/products"
+//    };
+//  }
 
   rpc GetProductById(GetProductRequest) returns (Product) {
     option (google.api.http) = {  // ✅ Define REST endpoint

@@ -14,7 +14,7 @@ type ProductServiceServer struct {
 }
 
 // GetProductByID handles gRPC requests
-func (s *ProductServiceServer) GetProductByID(ctx context.Context, req *pb.GetProductRequest) (*pb.Product, error) {
+func (s *ProductServiceServer) GetProductById(ctx context.Context, req *pb.GetProductRequest) (*pb.Product, error) {
 	log.Printf("Received request for product ID: %d", req.Id)
 	product, err := s.DB.GetProductByID(req.Id)
 	if err != nil {

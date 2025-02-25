@@ -14,8 +14,8 @@ brew install grpcurl  # macOS
 sudo apt install grpcurl  # Ubuntu/Debian
 choco install grpcurl  # Windows (via Chocolatey)
 
-grpcurl -plaintext -d '{"id": "1"}' localhost:50051 product.ProductServiceServer/GetProduct
-grpcurl -plaintext -d '{"id": 1}' localhost:50051 pb.ProductServiceServer/GetProductByID
+//grpcurl -plaintext -d '{"id": "1"}' localhost:50051 product.ProductServiceServer/GetProduct
+grpcurl -plaintext -d '{"id": 1}' localhost:50051 product.ProductService/GetProductById
 
 protoc -I proto/ -I third_party/googleapis \
   --go_out=gen --go_opt=paths=source_relative \
