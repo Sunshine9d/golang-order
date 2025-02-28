@@ -25,6 +25,20 @@ func initDB() *postgres.PostgresDB {
 	return db
 }
 
+func loggingInterceptor(
+	ctx context.Context,
+	req interface{},
+	info *grpc.UnaryServerInfo,
+	handler grpc.UnaryHandler) (interface{}, error) {
+
+	log.Printf("Received request for method: %s", info.FullMethod)
+	res, err := handler(ctx, req)
+	if err != nil {
+		log.Printf("Error handling request: %v", err)
+	}
+	return res, err
+}
+
 func main() {
 	db := initDB()
 	defer db.DB.Close() // Close only when main exits
@@ -34,7 +48,7 @@ func main() {
 		log.Fatalf("❌ Failed to listen: %v", err)
 	}
 
-	grpcServer := grpc.NewServer()
+	grpcServer := grpc.NewServer(grpc.UnaryInterceptor(loggingInterceptor))
 	productService := &server.ProductServiceServer{DB: db}
 	// Register ProductService
 	pb.RegisterProductServiceServer(grpcServer, productService) // ✅ Register the service

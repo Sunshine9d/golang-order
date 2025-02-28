@@ -7,17 +7,68 @@ option go_package = "github.com/Sunshine9d/golang-order/gen";
 import "google/api/annotations.proto";  // ✅ Required for REST support
 
 service ProductService {
-//  rpc GetProducts(GetProductRequest1) returns (Product) {
-//    option (google.api.http) = {  // ✅ Define REST endpoint
-//      get: "/v1/products"
-//    };
-//  }
-
   rpc GetProductById(GetProductRequest) returns (Product) {
     option (google.api.http) = {  // ✅ Define REST endpoint
       get: "/v1/products/{id}"
     };
   }
+
+  rpc CreateProduct(CreateProductRequest) returns (Product) {
+    option (google.api.http) = {  // ✅ Define REST endpoint
+      post: "/v1/products"
+      body: "*"
+    };
+  }
+
+  rpc UpdateProduct(UpdateProductRequest) returns (Product) {
+    option (google.api.http) = {  // ✅ Define REST endpoint
+      put: "/v1/products/{id}"
+      body: "*"
+    };
+  }
+
+  rpc DeleteProduct(DeleteProductRequest) returns (Empty) {
+    option (google.api.http) = {  // ✅ Define REST endpoint
+      delete: "/v1/products/{id}"
+    };
+  }
+
+  rpc GetProducts(GetProductsRequest) returns (Products) {
+    option (google.api.http) = {  // ✅ Define REST endpoint
+      get: "/v1/products"
+    };
+  }
+}
+
+message GetProductsRequest {
+  string name = 1;
+  int32 limit = 2;
+  int32 offset = 3;
+}
+
+message Products {
+  repeated Product products = 1;
+}
+
+message Empty {}
+
+message CreateProductRequest {
+  string name = 1;
+  double price = 2;
+  string description = 3;
+  int32 stock = 4;
+}
+
+message UpdateProductRequest {
+  int64 id = 1;
+  string name = 2;
+  double price = 3;
+  string description = 4;
+  int32 stock = 5;
+}
+
+message DeleteProductRequest {
+  int64 id = 1;
 }
 
 message GetProductRequest {
@@ -30,5 +81,8 @@ message GetProductRequest1 {
 message Product {
   int64 id = 1;
   string name = 2;
-  double price = 3;
+  double  price = 3;
+  string description = 4;
+  int32 stock = 5;
+  string created_at = 6;
 }

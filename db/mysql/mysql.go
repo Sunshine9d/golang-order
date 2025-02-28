@@ -27,4 +27,3 @@ func (m *MySQLDB) Connect() (*sql.DB, error) {
 	fmt.Println("Connected to MySQL")
 	return db, nil
 }
-

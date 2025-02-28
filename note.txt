@@ -17,6 +17,7 @@ choco install grpcurl  # Windows (via Chocolatey)
 //grpcurl -plaintext -d '{"id": "1"}' localhost:50051 product.ProductServiceServer/GetProduct
 grpcurl -plaintext -d '{"id": 1}' localhost:50051 product.ProductService/GetProductById
 
+export PATH="$PATH:$(go env GOPATH)/bin"
 protoc -I proto/ -I third_party/googleapis \
   --go_out=gen --go_opt=paths=source_relative \
   --go-grpc_out=gen --go-grpc_opt=paths=source_relative \
@@ -46,6 +47,8 @@ Connect PostgreSQL in Golang
 - go get github.com/jackc/pgx/v5
 db/database.go
 
+
+curl -X GET "http://localhost:8080/v1/products?limit=10&offset=0&name=" | jq
 
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
